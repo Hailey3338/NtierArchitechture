@@ -1,0 +1,25 @@
+Use [master]
+Go
+
+Create Database [NtierMvcDB]
+Go
+
+Use [NtierMvcDB]
+Go
+
+Create Schema [HR]
+Go
+
+Create Table [HR].[Employees]
+(
+   [Id] [int] Not null,
+   [Name] [nvarchar](50) Not null,
+   [Age] [int] not null,
+   [HiringDate] [datetime] null,
+   [GrossSalary] [decimal](10,2) not null,
+   [ModifiedDate] [datetime] not null,
+   Constraint [PK_Employees] Primary Key Clustered ([Id] ASC) On [Primary]) On [Primary]
+   Go
+
+   Alter Table [HR].[Employees] Add CONSTRAINT [DF_Employees_ModifiedDate] Default (GETDATE()) For [ModifiedDate]
+   Go
