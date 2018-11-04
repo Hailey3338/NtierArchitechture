@@ -1,0 +1,27 @@
+https://stackoverflow.com/questions/38194012/automapper-mapper-does-not-contain-definition-for-createmap
+
+A standard SOLID architecture would look something like this (each being a separate project):
+
+Project.Core
+Visible to everyone
+Does not contain any reference
+Contains your DTOs and helper classes
+Project.DataAccess
+Visible to Domain
+Contains your EF stuff
+Project.Domain
+Visible to Web only for configuring DI
+References Core
+Receives and returns DTOs
+It is where your business logic actually is
+Project.Abstractions
+Visible to Web and Domain
+Contains the interfaces of your services, which are implemented in Domain
+Project.Tests
+References Domain and Core
+Contains your tests
+Project.Web
+References Domain, Abstractions and Core
+Contains your actual Web APIs
+Uses Dependency Injection to call Domain's services.
+Receives either primitives (string, int, etc) or DTOs, and returns DTOs
